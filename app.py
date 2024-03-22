@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, Response
 import threading
 from replace import run_script as shirtreplace
+from size import run_script as shirtsize
 
 app = Flask(__name__)
 
@@ -13,6 +14,14 @@ def start_script():
     global stop_flag
     stop_flag = False
     thread = threading.Thread(target=shirtreplace)
+    thread.start()
+    return 'Script started'
+
+@app.route('/start_scripts', methods=['POST'])
+def start_scripts():
+    global stop_flag
+    stop_flag = False
+    thread = threading.Thread(target=shirtsize)
     thread.start()
     return 'Script started'
 
