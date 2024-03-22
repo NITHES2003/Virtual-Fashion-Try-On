@@ -150,13 +150,13 @@
     <h5>Storage:</h5>
     <div class="row" style="margin-left: 10px ;">
         <div class="column">
-          <img src="1.png" alt="Tshirt 1" style="width:30%">
+          <img src="{{url_for('static', filename = '1.png')}}" alt="Tshirt 1" style="width:30%">
         </div>
         <div class="column">
-          <img src="2.png" alt="Tshirt 2" style="width:30%">
+          <img src="{{url_for('static', filename = '2.png')}}" alt="Tshirt 2" style="width:30%">
         </div>
         <div class="column">
-          <img src="3.png" alt="Tshirt 3" style="width:30%">
+          <img src="{{url_for('static', filename = '3.png')}}" alt="Tshirt 3" style="width:30%">
         </div>
       </div>
     <h5>Instructions:</h5>
@@ -167,7 +167,7 @@
         <li>Make sure popup is allowed in browser</li>
         <li>Press 'Q' to Close</li>
     </ul>
-    <button type="button" class="btn btn-outline-success btn-lg" style="margin-left: 50%; ">Start</button>
+    <button type="button" class="btn btn-outline-success btn-lg" style="margin-left: 50%;" onclick="startReplace()">Start</button>
     <br>
 
     <h4 style="color: #6B5B95; font-weight: bold;">Gesture driven - Find the size</h4>
@@ -185,7 +185,7 @@
     <h5>Storage:</h5>
     <div class="row" style="margin-left: 10px ;">
         <div class="column">
-          <img src="2.png" alt="Tshirt 1" style="width:10%">
+          <img src="{{url_for('static', filename = '2.png')}}" alt="Tshirt 1" style="width:10%">
         </div>
         
       </div>
@@ -215,7 +215,7 @@
     <h6 style="color: #aaaaaa; margin-top: 10px;">Spectacles</h6>
     <div class="row" style="margin-left: 10px ;">
         <div class="column">
-          <img src="specs.png" alt="Tshirt 1" style="width:10%">
+          <img src="{{url_for('static', filename = 'specs.png')}}" alt="Tshirt 1" style="width:10%">
         </div>        
       </div>
     <h6 style="color: #aaaaaa;">Hat</h6>
@@ -235,21 +235,19 @@
     <button type="button" class="btn btn-danger btn-lg" style="margin-left: 10px;">Force Stop</button>
     <br>
     <br>
-    <button onclick="startCamera()">Start Camera</button>
-    <button onclick="stopCamera()">Stop Camera</button>
-
-    
+       
     <script>
-        function startCamera() {
-            fetch('/start_camera')
-                .then(response => console.log('Camera started'))
-                .catch(error => console.error('Error:', error));
-        }
+      function startReplace() {
+          fetch('/start_script', { method: 'POST' })
+              .then(response => console.log(response.text()))
+              .catch(error => console.error('Error:', error));
+      }
 
-        function stopCamera() {
-            // You can add functionality for stopping the camera feed here if needed
-            console.log('Camera stopped');
-        }
-    </script>
+      function stopScript() {
+          fetch('/stop_script', { method: 'POST' })
+              .then(response => console.log(response.text()))
+              .catch(error => console.error('Error:', error));
+      }
+  </script>
 </body>
 </html>
