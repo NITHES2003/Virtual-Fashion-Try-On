@@ -232,7 +232,7 @@
     <br>
     <br>
     <label style = "font-size: medium; font-weight: bolder; margin-left: 5px;">Use this button to stop the application in emergency situation</label>
-    <button type="button" class="btn btn-danger btn-lg" style="margin-left: 10px;">Force Stop</button>
+    <button type="button" class="btn btn-danger btn-lg" style="margin-left: 10px;" onclick="stopScript()">Force Stop</button>
     <br>
     <br>
        
@@ -256,7 +256,7 @@
       }
 
       function stopScript() {
-          fetch('/stop_script', { method: 'POST' })
+          fetch('/stop_server', { method: 'POST' })
               .then(response => console.log(response.text()))
               .catch(error => console.error('Error:', error));
       }

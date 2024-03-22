@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, Response
 import threading
+import os
+import signal
 from replace import run_script as shirtreplace
 from size import run_script as shirtsize
 from assessory import run_script as acceso
@@ -34,12 +36,10 @@ def start_scriptss():
     thread.start()
     return 'Script started'
 
-@app.route('/stop_script', methods=['POST'])
-def stop_script():
-    global stop_flag
-    stop_flag = True
-    return 'Script stopped'
-
+@app.route('/stop_server', methods=['POST'])
+def stop_server():
+    os.kill(os.getpid(), signal.SIGINT)
+    return 'Server stopped'
 
 if __name__ == '__main__':
     app.run(debug=True)
